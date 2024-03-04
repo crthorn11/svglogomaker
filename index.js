@@ -1,7 +1,6 @@
 const fs = require("fs");
 const inquirer = require('inquirer');
 const path = require('path');
-const generateSvg = require('/');
 
 const questions = [
     {
@@ -27,25 +26,50 @@ const questions = [
     },
 ];
 
-//create shape classes
-//Im not sure if I should create a letters class as an array this.letters []; or a full class with constructor
-
-class shape {
-    constructor(circle, triangle, square) {
-        this.circle = circle;
-        this.triangle = triangle;
-        this.square = square;
+class Shape{
+    constructor(text, textColor){
+        this.text = text;
+        this.textColor = textColor;
     }
 }
+
+class Circle extends Shape{
+    constructor(text,shapeColor, textColor){
+        super(  text,textColor)
+        this.shapeColor = shapeColor;
+     
+    }
+    render(){
+        console.log("Hello")
+        return <circle cx="150" cy="100" r="80" fill="green" />
+    }
+}
+class Triangle extends Shape{
+    constructor(text, shapeColor, textColor){
+        this.text = text;
+        this.shapeColor = shapeColor;
+        this.textColor = textColor
+    }
+}
+class Square extends Shape{
+    constructor(text, shapeColor, textColor){
+        this.text = text;
+        this.shapeColor = shapeColor;
+        this.textColor = textColor
+    }
+}
+let example = new Circle("AAA", "blue", "red")
+let exampelTwo = new Circle("aa","ss","dd")
+console.log(exampelTwo.render())
+console.log(example.render())
 //create render methods
-addShape(shape) {
+function addShape(shape) {
     this.shape.push(createdSVG);
 }
 
-const circle = shape();
-const triangle = shape();
-const square = shape();
-
+// const circle = new shape()
+// const triangle = new shape()
+// const square = new shape()
 
 function writeToFile(fileName, data) {
     //
