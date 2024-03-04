@@ -10,78 +10,77 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'Text color',
+        text: 'Text color',
         message: 'Please choose text color',
     },
     {
         type: 'checkbox',
-        name: 'shapes',
+        text: 'shapes',
         message: 'Please choose a shape',
         choices: ['Circle', 'Triangle', 'Square'],
     },
     {
         type: 'input',
-        name: 'shape color',
+        text: 'shape color',
         message: 'Please enter shape color',
     },
 ];
 
-class Shape{
-    constructor(text, textColor){
+class Shape {
+    constructor(text, textColor) {
         this.text = text;
         this.textColor = textColor;
     }
 }
 
-class Circle extends Shape{
-    constructor(text,shapeColor, textColor){
-        super(  text,textColor)
+class Circle extends Shape {
+    constructor(text, shapeColor, textColor) {
+        super(text, textColor);
         this.shapeColor = shapeColor;
-     
+
     }
-    render(){
-        console.log("Hello")
-        return <circle cx="150" cy="100" r="80" fill="green" />
+    render() {
+        return `<circle cx="150", cy="100", r="80", fill="${this.shapeColor}" />`;
     }
 }
-class Triangle extends Shape{
-    constructor(text, shapeColor, textColor){
+class Triangle extends Shape {
+    constructor(text, shapeColor, textColor) {
         this.text = text;
         this.shapeColor = shapeColor;
         this.textColor = textColor
     }
+    render() {
+        return `<triangle points="150, 18 244, 182 56, 182" fill="${this.shapeColor}" />`;
+    }
 }
-class Square extends Shape{
-    constructor(text, shapeColor, textColor){
+class Square extends Shape {
+    constructor(text, shapeColor, textColor) {
         this.text = text;
         this.shapeColor = shapeColor;
         this.textColor = textColor
     }
+    render() {
+        return `<square x="25" y="25" width="200" height="200" fill="${this.shapeColor}" />`;
+    }
 }
-let example = new Circle("AAA", "blue", "red")
-let exampelTwo = new Circle("aa","ss","dd")
-console.log(exampelTwo.render())
-console.log(example.render())
-//create render methods
+const newCircle = new Circle(
+    "SVG",
+    "GREEN",
+    "WHITE",
+);
+
 function addShape(shape) {
     this.shape.push(createdSVG);
-}
-
-// const circle = new shape()
-// const triangle = new shape()
-// const square = new shape()
-
-function writeToFile(fileName, data) {
-    //
-    return fs.writeFileSync(path.join(process.cwd(), fileName). data);
 }
 
 function init() {
     inquirer.prompt(questions).then((responses) => {
         console.log('Generated logo.svg');
-        writeToFile('./svglogomaker/createdSVG', writeToFile('generated.svg', responses));
+        writeToFile('./', writeToFile('generated.svg', responses));
     });
 }
+
+init();
 
 //add classes for shaped and letters?
 //add class for letters?
