@@ -1,82 +1,43 @@
-const fs = require("fs");
+const fs = require('fs');
 const inquirer = require('inquirer');
 const path = require('path');
+const writeToFile = require('createdSVG');
+const { Circle, Triangle, Square } = require("")
 
-const questions = [
+inquirer
+  .prompt([
     {
-        type: 'input',
-        text: 'characters',
-        message: 'Please enter at least 3 characters',
+      type: 'input',
+      name: 'shape',
+      message: 'Please choose your shape',
     },
     {
-        type: 'input',
-        text: 'Text color',
-        message: 'Please choose text color',
+      type: 'input',
+      name: 'shape_color',
+      message: 'Please choose shape color',
     },
     {
-        type: 'checkbox',
-        text: 'shapes',
-        message: 'Please choose a shape',
-        choices: ['Circle', 'Triangle', 'Square'],
+      type: 'input',
+      name: 'name',
+      message: 'Please enter 3 characters',
     },
     {
-        type: 'input',
-        text: 'shape color',
-        message: 'Please enter shape color',
+      type: 'input',
+      name: 'text_color',
+      message: 'Please enter text color',
     },
-];
+  ])
+  .then((answers) => {
+    const SVG = generateSVG(answers);
 
-class Shape {
-    constructor(text, textColor) {
-        this.text = text;
-        this.textColor = textColor;
-    }
-}
-
-class Circle extends Shape {
-    constructor(text, shapeColor, textColor) {
-        super(text, textColor);
-        this.shapeColor = shapeColor;
-
-    }
-    render() {
-        return `<circle cx="150", cy="100", r="80", fill="${this.shapeColor}" />`;
-    }
-}
-class Triangle extends Shape {
-    constructor(text, shapeColor, textColor) {
-        this.text = text;
-        this.shapeColor = shapeColor;
-        this.textColor = textColor
-    }
-    render() {
-        return `<triangle points="150, 18 244, 182 56, 182" fill="${this.shapeColor}" />`;
-    }
-}
-class Square extends Shape {
-    constructor(text, shapeColor, textColor) {
-        this.text = text;
-        this.shapeColor = shapeColor;
-        this.textColor = textColor
-    }
-    render() {
-        return `<square x="25" y="25" width="200" height="200" fill="${this.shapeColor}" />`;
-    }
-}
-const newCircle = new Circle(
-    "SVG",
-    "GREEN",
-    "WHITE",
-);
-
-function addShape(shape) {
-    this.shape.push(createdSVG);
-}
+    fs.writeFile('createdSVG', SVG, (err) =>
+      err ? console.log(err) : console.log('Successfully created SVG!')
+    );
+  });
 
 function init() {
     inquirer.prompt(questions).then((responses) => {
-        console.log('Generated logo.svg');
-        writeToFile('./', writeToFile('generated.svg', responses));
+        writeToFile('createdSVG', writeToFile('created.SVG', responses));
     });
 }
 
